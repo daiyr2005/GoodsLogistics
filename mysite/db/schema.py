@@ -13,6 +13,9 @@ class UserCreate(BaseModel):
     username: str
     email: EmailStr
     password: str = Field(..., min_length=8)
+    status: str
+    class Config:
+        orm_mode = True
 
 
 class UserLogin(BaseModel):
