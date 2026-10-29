@@ -14,16 +14,13 @@ from mysite.api import (
     Warehouse,
     auth,
     users,
+    ai,
 )
 from mysite.db.db import Base, engine
 from mysite.db.model import User
 
 app = FastAPI(title="Auth Service")
 
-
-@app.on_event("startup")
-def create_tables():
-    Base.metadata.create_all(bind=engine)
 
 
 app.include_router(auth.auth_router)
@@ -36,6 +33,7 @@ app.include_router(Review.router)
 app.include_router(Order.router)
 app.include_router(Warehouse.router)
 app.include_router(Deliver.router)
+app.include_router(ai.ai_router)
 
 setup_admin(app)
 

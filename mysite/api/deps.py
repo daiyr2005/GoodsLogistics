@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from mysite.db.db import SessionLocal
+from mysite.db.db    import SessionLocal
 
 
 def get_db():

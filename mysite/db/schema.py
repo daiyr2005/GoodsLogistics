@@ -75,8 +75,13 @@ class ProductIn(BaseModel):
     is_original: bool = True
 
 
-class ProductOut(ORMModel, ProductIn):
+class ProductOut(ORMModel):
     id: int
+    store_id: int
+    product_name: str
+    price: Decimal = Field(..., gt=0)
+    description: str | None = None
+    is_original: bool = True
     create_date: datetime
 
 
@@ -130,3 +135,21 @@ class DeliverIn(BaseModel):
 
 class DeliverOut(ORMModel, DeliverIn):
     id: int
+
+
+class ChatInputSchema(BaseModel):
+    question: str = Field(..., min_length=1)
+
+
+class ChatItemSchema(BaseModel):
+    id: int
+    product_name: str
+    price: float
+    store_id: int
+    is_original: bool
+    description: str | None = None
+
+
+class ChatOutputSchema(BaseModel):
+    answer: str
+    items: list[ChatItemSchema] = Field(default_factory=list)
